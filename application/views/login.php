@@ -16,12 +16,13 @@
 	    <div class="row login-page">
 	      <div class="col-sm-offset-3 col-sm-6 col-lg-offset-4 col-lg-4">
 		      <section class="log-in-box">
+		      	<div class="error"><?php echo $this->session->flashdata('err_message');?></div>
 		      	<div class="logo-img">
 	              <img src="https://cdn.shopify.com/s/files/1/2676/8804/files/Kora_Logo_Black2_x22.png?v=1515087092" alt="Korafitness" title="Korafitness" class="img-responsive ">
 	            </div> 
 	          	<h1>Korafitness Admin Panel</h1>
 						<div class="login-form">
-						  	<form action="<?php echo $this->config->item('base_url_with_index'); ?>kora_controller/adminLogin" method="post" enctype="multipart/form-data">
+						  	<form action="<?php echo $this->config->item('base_url_with_index'); ?>login" method="post" enctype="multipart/form-data">
 							  <div class="form-group">
 							    <label for="email">User Name</label>
 							    <input type="email" class="form-control" name="email" id="email" placeholder="User Name">
@@ -29,9 +30,6 @@
 							  <div class="form-group">
 							    <label for="pwd">Password</label>
 							    <input type="password" class="form-control" name="pwd" id="pwd" placeholder="Password">
-							  </div>
-							  <div class="form-group">
-							    <p><a href="">Forgot Password?</a></p>
 							  </div>
 							  <div class="form-group text-center">
 								  <button type="submit" class="btn admin-login-btn" name="loginSubmit">Login</button>

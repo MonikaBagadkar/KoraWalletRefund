@@ -14,10 +14,18 @@ class Kora_model extends CI_Model{
         $this->db->where($where);
         $query = $this->db->get('admin');
         if ($query->num_rows() == 1) {
-            return TRUE;
+            $row=$query->row();          
+            $data=array(
+                'id'=>$row->user_id,
+                'username'=>$row->user_name,
+                'password'=>$row->password
+                );
+            $this->session->set_userdata('logged_user',$data);
+           
+            return true;
         }
         else {
-           return False;
+            return False;
         }
 
     }
@@ -32,8 +40,9 @@ class Kora_model extends CI_Model{
         $this->db->select('*');
         $this->db->from('coupon');
         $this->db->join('vip_members', 'vip_members.shopify_customer_id = coupon.shopify_customer_id');
+        $this->db->where('order_id IS NOT NULL');
         $query = $this->db->get();
-        $result = $query->result_array($query); 
+        $result = $query->result_array($query);
         return $result;
     }
     public function updateRefund($amount, $refundAmt, $customerid)
@@ -51,7 +60,7 @@ class Kora_model extends CI_Model{
         'customer_id' => $customerid,
         'credit_balance' => $credit_balance,
         'amount_used' => $refundAmt,
-        'status' => 1
+        'status' => 2
         );
         $this->db->insert('credits', $data);
        
