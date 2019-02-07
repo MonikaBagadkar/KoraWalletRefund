@@ -46,7 +46,7 @@ class Admin extends CI_Controller {
 	public function amountRefund($amount, $refundAmt, $customerid)
 	{
 		$amountRefund = $this->Kora_model->updateRefund($amount, $refundAmt, $customerid);
-		redirect('/index.php/orderDetails/' .$customerid);
+		redirect('/index.php/orders/' .$customerid);
 	}
 	public function logout()
 	{

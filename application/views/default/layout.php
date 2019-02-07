@@ -123,7 +123,7 @@
 					  	$refundAmt = refundAmt;
 					  	$amount = adminid;
 					  	$customerid = customerid;
-					  	window.location.href="<?php echo $this->config->item('base_url_with_index').'KoraRefund/amountRefund/' ?>" + $amount + "/"  + $refundAmt + "/" + $customerid;
+					  	window.location.href="<?php echo $this->config->item('base_url_with_index').'Admin/amountRefund/' ?>" + $amount + "/"  + $refundAmt + "/" + $customerid;
 					  }
 			  }
 			}
@@ -136,7 +136,9 @@
 		    $(".modal-body #customerid").val(customerid);
 		});
 			$(document).ready(function() {
-			    $('#example').DataTable();
+			    $('#example').DataTable({
+				"order": []
+			    });
 			 
 			    $('input.global_filter').on( 'keyup click', function () {
 			        filterGlobal();

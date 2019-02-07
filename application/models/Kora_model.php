@@ -31,8 +31,11 @@ class Kora_model extends CI_Model{
     }
     public function getUserDetails(){
         $this->db->select('*');
-        $query = $this->db->get('vip_members');
-        $result = $query->result_array($query);
+	$this->db->order_by('created_at', 'desc');
+	
+	$query = $this->db->get('vip_members');
+	$result = $query->result_array($query);
+
         return $result;
     }
     public function getOrderDetails($id)
@@ -41,8 +44,9 @@ class Kora_model extends CI_Model{
         $this->db->from('coupon');
         $this->db->join('vip_members', 'vip_members.shopify_customer_id = coupon.shopify_customer_id');
         $this->db->where('order_id IS NOT NULL');
+	$this->db->where('coupon.shopify_customer_id', $id); 
         $query = $this->db->get();
-        $result = $query->result_array($query);
+	$result = $query->result_array($query);
         return $result;
     }
     public function updateRefund($amount, $refundAmt, $customerid)

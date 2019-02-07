@@ -23,8 +23,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url_with_index'] = 'http://localhost/KoraWalletRefund/index.php/';
-$config['base_url'] = 'http://localhost/KoraWalletRefund/';
+$config['base_url_with_index'] = 'https://champion.korafitness.com/admin/index.php/';
+$config['base_url'] = 'https://champion.korafitness.com/admin/';
 /*
 |--------------------------------------------------------------------------
 | Index File
