@@ -98,8 +98,13 @@
 						    <label class="control-label col-sm-4" for="RefundAmount">Refund Amount</label>
 						    <div class="col-sm-8">
 						      <input type="text" class="form-control" id="RefundAmount" name="RefundAmount" placeholder="Refund Amount" required="">
-						      <input type="hidden" class="form-control" id="amountid" placeholder="Refund Amount">
 						      <input type="hidden" class="form-control" id="customerid" placeholder="Refund Amount">
+						    </div>
+						  </div>
+						  <div class="form-group">
+						    <label class="control-label col-sm-4" for="RefundAmount">Credit Amount</label>
+						    <div class="col-sm-8">
+						      <input type="text" class="form-control" id="amountid" placeholder="Refund Amount">
 						    </div>
 						  </div>
 						  <p id="error"></p>
@@ -107,7 +112,7 @@
 						
 		      </div>
 		      <div class="modal-footer text-center">
-		         <button type="button" class="btn refund-btn" onclick="myFunction()" >SUBMIT</button>
+		         <button type="button" class="btn refund-btn" onclick="refundAmount()" >SUBMIT</button>
 		      </div>
 		      </form>
 		    </div>

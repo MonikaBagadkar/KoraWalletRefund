@@ -48,6 +48,16 @@ class Admin extends CI_Controller {
 		$amountRefund = $this->Kora_model->updateRefund($amount, $refundAmt, $customerid);
 		redirect('/index.php/orders/' .$customerid);
 	}
+	public function addRefund($customerid, $creditamount, $refundAmt)
+	{
+		$addRefund = $this->Kora_model->addRefundAmount($customerid, $creditamount, $refundAmt);
+		redirect('/index.php/dashboard/');
+	}
+	public function subtractRefund($customerid, $creditamount, $refundAmt)
+	{
+		$addRefund = $this->Kora_model->subtractRefundAmount($customerid, $creditamount, $refundAmt);
+		redirect('/index.php/dashboard/');
+	}
 	public function logout()
 	{
 		$this->session->unset_userdata("logged_user");

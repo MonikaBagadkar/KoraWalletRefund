@@ -39,6 +39,8 @@
 								        <thead class="data-table-head">
 								            <tr>
 								                <th>Customer Id</th>
+								                <th>Email</th>
+								                <th>Name</th>
 										        <th>Shopify Customer Id</th>
 										        <th>Credit Amount</th>
 										        <th>Order Date</th>
@@ -51,14 +53,15 @@
 						      				foreach ($userDetails as $UserDetails) {  //echo "<pre>"; print_r($UserDetails); ?> 
 								            <tr>
 								                <td><?php echo $UserDetails['customer_id']; ?></td>
+								                <td><?php echo $UserDetails['customer_email']; ?></td>
+								                <td><?php echo $UserDetails['customer_name']; ?></td>
 								                <td><?php echo $UserDetails['shopify_customer_id']; ?></td>
 								                <td><?php echo $UserDetails['credit_amount']; ?></td>
 								                <td><?php echo $UserDetails['created_at']; ?></td>
 								                <td><?php echo $UserDetails['next_charge_scheduled_at']; ?></td>
 								                <td>
-								                	<a class="btn btn-xs btn-view" href="<?php echo $this->config->item('base_url_with_index').'orders/'.$UserDetails['shopify_customer_id']; ?>">
-								                		<i class="fa fa-search"></i> View</a>
-									        		<!--<a href="#" class="btn btn-xs btn-lightred"><i class="fa fa-times"></i> Delete</a>-->
+								                	<a class="btn btn-xs btn-view" href="<?php echo $this->config->item('base_url_with_index').'orders/'.$UserDetails['shopify_customer_id']; ?>"> View</a>
+									        		<button class="btn btn-xs btn-view" id="resetBtn" data-toggle="modal" data-target="#resetModal"  data-shopifyid="<?php echo $UserDetails['shopify_customer_id']; ?>" data-creditamount="<?php echo $UserDetails['credit_amount']; ?>">Reset</button> 
 								                </td>
 								            </tr>
 								            <?php } ?>  
@@ -74,4 +77,99 @@
 				</section>
 			</div>
 		</main>
-		
+				<!-- Modal Start-->
+		<div id="resetModal" class="admin-model modal fade" role="dialog">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		    	<form class="form-horizontal" id="login-form">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i></button>
+		        <h4 class="modal-title">Please select the option</h4>
+		      </div>
+		      <div class="modal-body">
+						  <div class="btn-add-sub">
+						  	<button type="button" class="btn refund-btn" id="add" data-toggle="modal" data-dismiss="modal" data-target="#addModal">Add Refund Reset</button>
+						    <button type="button" class="btn refund-btn" id="add" data-toggle="modal" data-dismiss="modal" data-target="#subtractModal">Subtract Refund Reset</button>
+						  </div>
+						  <p id="error"></p>
+		      </div>
+		      </form>
+		    </div>
+		  </div>
+		</div>
+		<!-- Modal Start-->
+		<div id="addModal" class="admin-model modal fade" role="dialog">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		    	<form class="form-horizontal" id="login-form">
+			      <div class="modal-header">
+			        <button type="button" class="close" data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i></button>
+			        <h4 class="modal-title">Add Refund Reset</h4>
+			      </div>
+			      <div class="modal-body">
+			      			  <div class="form-group">
+							    <label class="control-label col-sm-4" for="CustomerId">Customer Id</label>
+							    <div class="col-sm-8">
+							      <input type="text" class="form-control" id="customerid">
+							    </div>
+							  </div>
+							  <div class="form-group">
+							    <label class="control-label col-sm-4" for="RefundAmount">Credit Amount</label>
+							    <div class="col-sm-8">
+							      <input type="text" class="form-control" id="creditamt" placeholder="Credit Amount">
+							    </div>
+							  </div>
+							  <div class="form-group">
+							    <label class="control-label col-sm-4" for="RefundAmount">Add Refund Amount</label>
+							    <div class="col-sm-8">
+							      <input type="text" class="form-control" id="refundamount" placeholder="Refund Amount">
+							    </div>
+							  </div>
+							  <p id="errormsg"></p>
+			      </div>
+			       <div class="modal-footer text-center">
+			         <button type="button" id="btnAdd" class="btn refund-btn" onclick="addRefund()" >SUBMIT</button>
+			      </div>
+		      </form>
+		    </div>
+		  </div>
+		</div>
+
+		<!-- Modal Start-->
+		<div id="subtractModal" class="admin-model modal fade" role="dialog">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		    	<form class="form-horizontal" id="login-form">
+			      <div class="modal-header">
+			        <button type="button" class="close" data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i></button>
+			        <h4 class="modal-title">Subtract Refund Reset</h4>
+			      </div>
+			      <div class="modal-body">
+			      			  <div class="form-group">
+							    <label class="control-label col-sm-4" for="CustomerId">Customer Id</label>
+							    <div class="col-sm-8">
+							      <input type="text" class="form-control" id="customerid">
+							    </div>
+							  </div>
+							  <div class="form-group">
+							    <label class="control-label col-sm-4" for="RefundAmount">Credit Amount</label>
+							    <div class="col-sm-8">
+							      <input type="text" class="form-control" id="creditamt" placeholder="Credit Amount">
+							    </div>
+							  </div>
+							  <div class="form-group">
+							    <label class="control-label col-sm-4" for="RefundAmount">Subtract Refund Amount</label>
+							    <div class="col-sm-8">
+							      <input type="text" class="form-control" id="subtractrefund" placeholder="Refund Amount">
+							    </div>
+							  </div>
+							  <p id="errormessage"></p>
+			      </div>
+			       <div class="modal-footer text-center">
+			         <button type="button" id="btnSubtract" class="btn refund-btn" onclick="subtractRefund()" >SUBMIT</button>
+			      </div>
+		      </form>
+		    </div>
+		  </div>
+		</div>
+

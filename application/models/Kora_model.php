@@ -30,12 +30,10 @@ class Kora_model extends CI_Model{
 
     }
     public function getUserDetails(){
-        $this->db->select('*');
-	$this->db->order_by('created_at', 'desc');
-	
-	$query = $this->db->get('vip_members');
-	$result = $query->result_array($query);
-
+       $this->db->select('*');
+	   $this->db->order_by('created_at', 'desc');
+	   $query = $this->db->get('vip_members');
+	   $result = $query->result_array($query);
         return $result;
     }
     public function getOrderDetails($id)
@@ -71,6 +69,45 @@ class Kora_model extends CI_Model{
 
         // update in vip_members
         $this->db->set('credit_amount', $credit_balance);
+        $this->db->where('shopify_customer_id',  $customerid);
+        $this->db->update('vip_members');
+    }
+    public function addRefundAmount($customerid, $creditamount, $refundAmt)
+    {
+        $creditAmount = $creditamount + $refundAmt;
+        // insert in credits
+        $data = array(
+        'customer_id' => $customerid,
+        'credit_balance' => $creditAmount,
+        'amount_used' => $refundAmt,
+        'status' => 3 //addreset
+        );
+        $this->db->insert('credits', $data);
+
+
+
+        // update in vip_members
+        $this->db->set('credit_amount', $creditAmount);
+        $this->db->where('shopify_customer_id',  $customerid);
+        $this->db->update('vip_members');
+    }
+
+    public function subtractRefundAmount($customerid, $creditamount, $refundAmt)
+    {
+        $creditAmount = $creditamount - $refundAmt;
+        // insert in credits
+        $data = array(
+        'customer_id' => $customerid,
+        'credit_balance' => $creditAmount,
+        'amount_used' => $refundAmt,
+        'status' => 4 //subtractreset
+        );
+        $this->db->insert('credits', $data);
+
+
+
+        // update in vip_members
+        $this->db->set('credit_amount', $creditAmount);
         $this->db->where('shopify_customer_id',  $customerid);
         $this->db->update('vip_members');
     }

@@ -6,6 +6,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link href='https://fonts.googleapis.com/css?family=Open+Sans:300,400,700' rel='stylesheet' type='text/css'>
 		<link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/style.css">
+		<link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/custom.css">
 		<script src="<?php echo base_url(); ?>assets/js/modernizr.js"></script>
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
@@ -97,7 +98,7 @@
 		    ).draw();
 		}
 		 
-		function myFunction() {
+		function refundAmount() {
 			  var refundAmt = document.getElementById("RefundAmount").value;
 			  var amountid = $(this).data('amount-id');
 			  var amountUsed = document.getElementById("amountid").value;
@@ -127,14 +128,14 @@
 					  }
 			  }
 			}
-			$(document).on("click", "#refund", function() {
-		    var adminid = $(this).data('id');
-		    var amountid = $(this).data('amount-id');
-		    var customerid = $(this).data('customer-id');
-		    $(".modal-body #showid").val(adminid);
-		    $(".modal-body #amountid").val(amountid);
-		    $(".modal-body #customerid").val(customerid);
-		});
+				$(document).on("click", "#refund", function() {
+				    var adminid = $(this).data('id');
+				    var amountid = $(this).data('amount-id');
+				    var customerid = $(this).data('customer-id');
+				    $(".modal-body #showid").val(adminid);
+				    $(".modal-body #amountid").val(amountid);
+				    $(".modal-body #customerid").val(customerid);
+				});
 			$(document).ready(function() {
 			    $('#example').DataTable({
 				"order": []
@@ -147,7 +148,77 @@
 			    $('input.column_filter').on( 'keyup click', function () {
 			        filterColumn( $(this).parents('tr').attr('data-column') );
 			    } );
-			} );
+
+			$(document).on("click", "#resetBtn", function() {
+			  	 var shopifyid = $(this).data('shopifyid');
+			  	 var creditamount = $(this).data('creditamount');
+			  	 $(".modal-body #customerid").val(shopifyid);
+			  	 $(".modal-body #creditamt").val(creditamount);
+			  });
+
+			  $("#btnAdd").click(function(){
+			  	 var customerid = document.getElementById("customerid").value;
+			  	 var refundAmt = document.getElementById("refundamount").value;
+			  	 var creditamt = document.getElementById("creditamt").value;
+
+			  if (refundAmt == '') { 
+			  		$('#refundamount').focus();
+			  		document.getElementById("errormsg").innerHTML = "<p style='color:red;text-align:center;'><b>Please Fill Required Field</b></p>";
+			  		$("#addModal").modal({
+			            backdrop: 'static',
+			            keyboard: false
+			        });
+					return false;
+			    }
+			  else {
+				 	if (refundAmt > creditamt) {
+					  	document.getElementById("errormsg").innerHTML = "<p style='color:red;text-align:center;'><b>Refund Should not be greater then Amount Used</b></p>";
+					  	return false;
+					  }
+					else {
+						var customerid = document.getElementById("customerid").value;
+			  	 		var refundAmt = document.getElementById("refundamount").value;
+			  	 		var creditamt = document.getElementById("creditamt").value;
+						$customerid = customerid;
+			  	 		$creditamt = creditamt;
+			  	 		$refundAmt = refundAmt;
+			  	 		window.location.href="<?php echo $this->config->item('base_url_with_index').'Admin/addRefund/' ?>" + $customerid + "/"  + $creditamt + "/" + $refundAmt;
+					  }
+			  }
+
+			  });
+			    $("#btnSubtract").click(function(){
+			  	 var customerid = document.getElementById("customerid").value;
+			  	 var refundAmt = document.getElementById("subtractrefund").value;
+			  	 var creditamt = document.getElementById("creditamt").value;
+
+			if (refundAmt == '') { 
+			  		$('#refundamount').focus();
+			  		document.getElementById("errormessage").innerHTML = "<p style='color:red;text-align:center;'><b>Please Fill Required Field</b></p>";
+			  		$("#addModal").modal({
+			            backdrop: 'static',
+			            keyboard: false
+			        });
+					return false;
+			    }
+			else {
+				 	if (refundAmt > creditamt) {
+					  	document.getElementById("errormessage").innerHTML = "<p style='color:red;text-align:center;'><b>Refund Should not be greater then Amount Used</b></p>";
+					  	return false;
+					  }
+					else {
+						var customerid = document.getElementById("customerid").value;
+			  	 		var refundAmt = document.getElementById("subtractrefund").value;
+			  	 		var creditamt = document.getElementById("creditamt").value;
+						 $customerid = customerid;
+					  	 $creditamt = creditamt;
+					  	 $refundAmt = refundAmt;
+					  	 window.location.href="<?php echo $this->config->item('base_url_with_index').'Admin/subtractRefund/' ?>" + $customerid + "/"  + $creditamt + "/" + $refundAmt;
+					  }
+			  }
+			  });
+			 // });
+			});
 		</script>
 		<!--Data Table End Script -->
 		<!-- Script End-->
