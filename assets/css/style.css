@@ -867,6 +867,7 @@ Common style
   color: #fff;
   background-color: #5b8ad8;
   border-color: #4da4de !important;
+  margin-bottom: 13% !important;
 }
 .btn-lightred {
   background-color: #e05d6f;
@@ -899,7 +900,8 @@ Common style
 }
 .admin-model .modal-footer{
   text-align: center;
-  background-color: #dadada;
+  /* background-color: #dadada; */
+  border-top: 0px solid #e5e5e5;
 }
 .refund-btn{
   background-color: #1ab4e0;
@@ -915,3 +917,4 @@ Common style
     font-size: 18px;
   }
   }
+

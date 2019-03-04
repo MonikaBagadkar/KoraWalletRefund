@@ -60,7 +60,7 @@
 								                <td><?php echo $UserDetails['created_at']; ?></td>
 								                <td><?php echo $UserDetails['next_charge_scheduled_at']; ?></td>
 								                <td>
-								                	<a class="btn btn-xs btn-view" href="<?php echo $this->config->item('base_url_with_index').'orders/'.$UserDetails['shopify_customer_id']; ?>"> View</a>
+								                	<a class="btn btn-xs btn-view" href="<?php echo $this->config->item('base_url_with_index').'orders/'.$UserDetails['shopify_customer_id']; ?>"> View</a><br>
 									        		<button class="btn btn-xs btn-view" id="resetBtn" data-toggle="modal" data-target="#resetModal"  data-shopifyid="<?php echo $UserDetails['shopify_customer_id']; ?>" data-creditamount="<?php echo $UserDetails['credit_amount']; ?>">Reset</button> 
 								                </td>
 								            </tr>
@@ -84,13 +84,47 @@
 		    	<form class="form-horizontal" id="login-form">
 		      <div class="modal-header">
 		        <button type="button" class="close" data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i></button>
-		        <h4 class="modal-title">Please select the option</h4>
+		        <h4 class="modal-title">Reset Refund</h4>
 		      </div>
 		      <div class="modal-body">
-						  <div class="btn-add-sub">
+		      				<div class="form-group">
+							    <label class="control-label col-sm-4" for="CustomerId">Customer Id</label>
+							    <div class="col-sm-8">
+							      <input type="text" class="form-control" id="customerid">
+							    </div>
+							  </div>
+							  <div class="form-group">
+							    <label class="control-label col-sm-4" for="RefundAmount">Credit Amount</label>
+							    <div class="col-sm-8">
+							      <input type="text" class="form-control" readonly="" id="creditamt" placeholder="Credit Amount">
+							    </div>
+							  </div>
+							    <div class="form-group">
+							    <label class="control-label col-sm-4" for="RefundAmount">Select Option to reset refund</label>
+							    <div class="col-sm-8">
+							      <input type="radio" class="" id="addrefund" name="radio"> Add Refund   
+							      	&nbsp&nbsp
+							      <input type="radio" class="" id="subtractrefund"  name="radio">  Subtract Refund
+							    </div>
+							  </div>
+							<div class="form-group">
+							    <label class="control-label col-sm-4" for="RefundAmount">Refund Amount</label>
+							    <div class="col-sm-8">
+							      <input type="text" class="form-control" id="refundamount" placeholder="Refund Amount">
+							    </div>
+							  </div> 
+							  <p id="errormsg"></p>
+
+						   <!-- <div class="btn-add-sub">
 						  	<button type="button" class="btn refund-btn" id="add" data-toggle="modal" data-dismiss="modal" data-target="#addModal">Add Refund Reset</button>
 						    <button type="button" class="btn refund-btn" id="add" data-toggle="modal" data-dismiss="modal" data-target="#subtractModal">Subtract Refund Reset</button>
 						  </div>
+						  <p id="error"></p>-->
+						  
+						<div class="modal-footer text-center">
+					    	<button type="button" id="btnRefund" class="btn refund-btn" onclick="" >SUBMIT</button>
+					    </div>
+						  <p id="errormsg"></p>
 						  <p id="error"></p>
 		      </div>
 		      </form>

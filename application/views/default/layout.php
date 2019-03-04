@@ -156,27 +156,26 @@
 			  	 $(".modal-body #creditamt").val(creditamount);
 			  });
 
-			  $("#btnAdd").click(function(){
+
+			$("#btnRefund").click(function(){
 			  	 var customerid = document.getElementById("customerid").value;
 			  	 var refundAmt = document.getElementById("refundamount").value;
 			  	 var creditamt = document.getElementById("creditamt").value;
+			  	 var button1 = document.getElementById("addrefund");
+				 var button2 = document.getElementById("subtractrefund");
+				  	 if (button1.checked){
 
-			  if (refundAmt == '') { 
-			  		$('#refundamount').focus();
-			  		document.getElementById("errormsg").innerHTML = "<p style='color:red;text-align:center;'><b>Please Fill Required Field</b></p>";
-			  		$("#addModal").modal({
-			            backdrop: 'static',
-			            keyboard: false
-			        });
-					return false;
-			    }
-			  else {
-				 	if (refundAmt > creditamt) {
-					  	document.getElementById("errormsg").innerHTML = "<p style='color:red;text-align:center;'><b>Refund Should not be greater then Amount Used</b></p>";
-					  	return false;
-					  }
-					else {
-						var customerid = document.getElementById("customerid").value;
+						if (refundAmt == '') { 
+					  		$('#refundamount').focus();
+					  		document.getElementById("errormsg").innerHTML = "<p style='color:red;text-align:center;'><b>Please Fill Required Field</b></p>";
+					  		$("#addModal").modal({
+					            backdrop: 'static',
+					            keyboard: false
+					        });
+							return false;
+					    }
+					  else {
+					    var customerid = document.getElementById("customerid").value;
 			  	 		var refundAmt = document.getElementById("refundamount").value;
 			  	 		var creditamt = document.getElementById("creditamt").value;
 						$customerid = customerid;
@@ -184,40 +183,35 @@
 			  	 		$refundAmt = refundAmt;
 			  	 		window.location.href="<?php echo $this->config->item('base_url_with_index').'Admin/addRefund/' ?>" + $customerid + "/"  + $creditamt + "/" + $refundAmt;
 					  }
-			  }
 
-			  });
-			    $("#btnSubtract").click(function(){
-			  	 var customerid = document.getElementById("customerid").value;
-			  	 var refundAmt = document.getElementById("subtractrefund").value;
-			  	 var creditamt = document.getElementById("creditamt").value;
+					} else if (button2.checked) {
 
-			if (refundAmt == '') { 
-			  		$('#refundamount').focus();
-			  		document.getElementById("errormessage").innerHTML = "<p style='color:red;text-align:center;'><b>Please Fill Required Field</b></p>";
-			  		$("#addModal").modal({
-			            backdrop: 'static',
-			            keyboard: false
-			        });
-					return false;
-			    }
-			else {
-				 	if (refundAmt > creditamt) {
-					  	document.getElementById("errormessage").innerHTML = "<p style='color:red;text-align:center;'><b>Refund Should not be greater then Amount Used</b></p>";
+					if (refundAmt == '') { 
+					  		$('#refundamount').focus();
+					  		document.getElementById("errormsg").innerHTML = "<p style='color:red;text-align:center;'><b>Please Fill Required Field</b></p>";
+					  		$("#addModal").modal({
+					            backdrop: 'static',
+					            keyboard: false
+					        });
+							return false;
+					    }
+					  else {
+					  	if (refundAmt > creditamt) {
+					  	document.getElementById("error").innerHTML = "<p style='color:red;text-align:center;'><b>Refund Should not be greater then Amount Used</b></p>";
 					  	return false;
-					  }
-					else {
-						var customerid = document.getElementById("customerid").value;
-			  	 		var refundAmt = document.getElementById("subtractrefund").value;
+					  	}
+					  else {
+					  	var customerid = document.getElementById("customerid").value;
+			  	 		var refundAmt = document.getElementById("refundamount").value;
 			  	 		var creditamt = document.getElementById("creditamt").value;
 						 $customerid = customerid;
 					  	 $creditamt = creditamt;
 					  	 $refundAmt = refundAmt;
 					  	 window.location.href="<?php echo $this->config->item('base_url_with_index').'Admin/subtractRefund/' ?>" + $customerid + "/"  + $creditamt + "/" + $refundAmt;
+					  	}
 					  }
-			  }
+					}
 			  });
-			 // });
 			});
 		</script>
 		<!--Data Table End Script -->
