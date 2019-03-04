@@ -100,11 +100,11 @@
 							    </div>
 							  </div>
 							    <div class="form-group">
-							    <label class="control-label col-sm-4" for="RefundAmount">Select Option to reset refund</label>
+							    <label class="control-label col-sm-4" for="RefundAmount">Amount:</label>
 							    <div class="col-sm-8">
-							      <input type="radio" class="" id="addrefund" name="radio"> Add Refund   
+							      <input type="radio" class="" id="addrefund" name="radio"> Add   
 							      	&nbsp&nbsp
-							      <input type="radio" class="" id="subtractrefund"  name="radio">  Subtract Refund
+							      <input type="radio" class="" id="subtractrefund"  name="radio"> Subtract 
 							    </div>
 							  </div>
 							<div class="form-group">

@@ -167,7 +167,7 @@
 
 						if (refundAmt == '') { 
 					  		$('#refundamount').focus();
-					  		document.getElementById("errormsg").innerHTML = "<p style='color:red;text-align:center;'><b>Please Fill Required Field</b></p>";
+					  		document.getElementById("errormsg").innerHTML = "<p style='color:red;text-align:center;'><b>Please fill required field</b></p>";
 					  		$("#addModal").modal({
 					            backdrop: 'static',
 					            keyboard: false
@@ -188,7 +188,7 @@
 
 					if (refundAmt == '') { 
 					  		$('#refundamount').focus();
-					  		document.getElementById("errormsg").innerHTML = "<p style='color:red;text-align:center;'><b>Please Fill Required Field</b></p>";
+					  		document.getElementById("errormsg").innerHTML = "<p style='color:red;text-align:center;'><b>Please fill required field</b></p>";
 					  		$("#addModal").modal({
 					            backdrop: 'static',
 					            keyboard: false
@@ -197,7 +197,7 @@
 					    }
 					  else {
 					  	if (refundAmt > creditamt) {
-					  	document.getElementById("error").innerHTML = "<p style='color:red;text-align:center;'><b>Refund Should not be greater then Amount Used</b></p>";
+					  	document.getElementById("error").innerHTML = "<p style='color:red;text-align:center;'><b>Amount to subtract should not be greater then amount in wallet</b></p>";
 					  	return false;
 					  	}
 					  else {
